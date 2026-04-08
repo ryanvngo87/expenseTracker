@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "jquery": "^4.0.0",
+    "react": "^19.2.4"
+  },
+  "devDependencies": {
+    "@types/jquery": "^4.0.0",
+    "@types/jquery.validation": "^1.17.1",
+    "@types/jqueryui": "^1.12.24",
+    "typescript": "^6.0.2"
+  }
+}

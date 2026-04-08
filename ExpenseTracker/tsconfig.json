@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "target": "ES2017",
+    "module": "none",
+    "strict": true,
+    "noImplicityAny": false,
+    "outDir": "wwwroot/js",
+    "sourceMap": true
+  },
+  "include": ["Scripts/ts/**/*.ts"]
+}
