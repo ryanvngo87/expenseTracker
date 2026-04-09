@@ -2,14 +2,14 @@
 
 ## 1. Introduction
 
-Expense Tracker is a RESTful API that allows users to manage their personal expenses. Users can create, view, update, and delete expense records. The API is built with ASP.NET Core 8 and persists data to a SQL Server database via Entity Framework Core.
+Expense Tracker is a full-stack web application that allows users to manage their personal expenses. It consists of a RESTful API built with ASP.NET Core 8 and a React frontend served as static files. Users can create, view, update, and delete expense records. Data is persisted to a SQL Server database via Entity Framework Core.
 
 ## 2. System Architecture
 
-The software uses an **MVC (Model-View-Controller)** architecture:
+The software uses an **MVC (Model-View-Controller)** architecture with a React SPA frontend:
 
 - **Model** — Entity and DTO classes representing expense data (`Expense`, `AddExpenseDto`, `UpdateExpenseDto`)
-- **View** — Swagger UI for API exploration and testing (available in Development mode)
+- **View** — React SPA (served from `wwwroot`) for browsing expenses; Swagger UI for API exploration and testing (available in Development mode)
 - **Controller** — `ExpenseController` handles all HTTP requests and delegates to the data layer
 
 ## 3. Data Design
@@ -34,6 +34,7 @@ Base route: `/api/expense`
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
+| GET | `/api/expense` | Retrieve all expenses |
 | GET | `/api/expense/{id}` | Retrieve an expense by ID |
 | POST | `/api/expense` | Add a new expense |
 | PUT | `/api/expense/{id}` | Update an existing expense |
@@ -53,15 +54,30 @@ ExpenseTracker/
 │   │   └── Expense.cs         # Core expense entity
 │   ├── AddExpenseDto.cs       # DTO for creating expenses
 │   └── UpdateExpenseDto.cs    # DTO for updating expenses
+├── src/                       # React frontend source
+│   ├── components/
+│   │   ├── ExpenseGrid.tsx    # Expense table component
+│   │   └── ExpenseGrid.css
+│   ├── types/
+│   │   └── expense.ts         # TypeScript interface for Expense
+│   ├── App.tsx
+│   ├── main.tsx
+│   ├── index.html
+│   └── index.css
+├── wwwroot/                   # Built React SPA (output of Vite build)
 └── Program.cs                 # App configuration and startup
 
 ExpenseTracker.Tests/
 └── TestExpenseController.cs   # Unit tests for the controller
+
+vite.config.ts                 # Vite build config (proxies /api to ASP.NET)
 ```
 
 ## 6. User Interface Design
 
-The API is documented and testable via **Swagger UI**, accessible at `/swagger` when running in Development mode. All endpoints accept and return JSON.
+The application includes a **React SPA** served at the root (`/`) that displays all expenses in a table. It fetches data from `GET /api/expense` and renders it with loading and error states.
+
+The API is also documented and testable via **Swagger UI**, accessible at `/swagger` when running in Development mode. All endpoints accept and return JSON.
 
 ## 7. Assumptions and Dependencies
 
@@ -70,6 +86,7 @@ The API is documented and testable via **Swagger UI**, accessible at `/swagger` 
 - **ORM:** Entity Framework Core 8
 - **API Docs:** Swashbuckle / Swagger (dev only)
 - **Testing:** xUnit
+- **Frontend:** React 18, TypeScript, Vite
 
 ### Setup
 
@@ -85,10 +102,17 @@ The API is documented and testable via **Swagger UI**, accessible at `/swagger` 
    ```bash
    dotnet ef database update
    ```
-3. Run the application:
+3. Build the React frontend:
+   ```bash
+   npm install
+   npm run build
+   ```
+4. Run the application:
    ```bash
    dotnet run
    ```
+
+For frontend development with hot reload, run `npm run dev` alongside `dotnet run`. The Vite dev server proxies `/api` requests to `https://localhost:7240`.
 
 ## 8. Glossary of Terms
 
