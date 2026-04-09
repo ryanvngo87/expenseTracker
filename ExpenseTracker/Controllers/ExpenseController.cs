@@ -14,6 +14,18 @@ namespace ExpenseTracker.Controllers
         {
             _context = context;
         }
+        [HttpGet]
+        public IActionResult GetAllExpenses()
+        {
+            try
+            {
+                var expenses = _context.Expense.ToList();
+                return Ok(expenses);
+            } catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
 
         [HttpGet("{id}")]
         public IActionResult GetExpense(int id)
