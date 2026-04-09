@@ -1,0 +1,15 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 1.5rem;
+  background: #fff;
+  color: #222;
+}
+
+.app h1 {
+  font-family: sans-serif;
+  margin-bottom: 1rem;
+}

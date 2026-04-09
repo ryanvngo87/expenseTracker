@@ -1,11 +1,14 @@
 {
   "compilerOptions": {
     "target": "ES2017",
-    "module": "none",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "jsx": "react-jsx",
     "strict": true,
-    "noImplicityAny": false,
-    "outDir": "wwwroot/js",
-    "sourceMap": true
+    "noImplicitAny": true,
+    "sourceMap": true,
+    "lib": ["ES2017", "DOM", "DOM.Iterable"],
+    "skipLibCheck": true
   },
-  "include": ["Scripts/ts/**/*.ts"]
+  "include": ["src/**/*.ts", "src/**/*.tsx"]
 }

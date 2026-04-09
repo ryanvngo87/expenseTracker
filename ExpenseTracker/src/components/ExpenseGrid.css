@@ -1,0 +1,35 @@
+.expense-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: sans-serif;
+  font-size: 0.95rem;
+}
+
+.expense-table th,
+.expense-table td {
+  padding: 10px 14px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.expense-table th {
+  background-color: #f4f4f4;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+}
+
+.expense-table tbody tr:hover {
+  background-color: #f9f9f9;
+}
+
+.grid-status {
+  font-family: sans-serif;
+  color: #555;
+  padding: 1rem 0;
+}
+
+.grid-error {
+  color: #c0392b;
+}
